@@ -1,0 +1,44 @@
+import serial
+import time
+import random
+from itertools import count
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+#import matplotlib.animation as anim
+
+#any error above write in the terminal pip install (the name of the module)
+ser = serial.Serial('COM3',9600)
+
+c1=[]
+c2=[]
+time.sleep(2)
+y=[1,2,3,4,5,6,7,8,9,10]
+
+#clearing the text file
+file1 = open("sampleText.txt","w")
+file1.write("")
+
+
+for i in range(10):
+    b = ser.readline().strip()
+    h = b.split(",")
+    s1= float(h[0])
+    s2= float(h[1])
+
+    c1.append(s1)
+    c2.append(s2)
+    print(b)
+    file1 = open("sampleText.txt", "a")
+    file1.write(str(b))
+    file1.write("\n")
+    time.sleep(.25)
+
+
+
+
+plt.plot(y,c1)
+plt.plot(y,c2)
+plt.style.use('fivethirtyeight')
+plt.tight_layout()
+plt.show()
+
